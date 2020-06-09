@@ -3,11 +3,11 @@ from slugify import slugify
 from time import sleep
 
 def MarkDone(slug):
-    with open("done.txt", "a+") as myfile:
+    with open("/home/reaper/scripts/archive.log", "a+") as myfile:
         myfile.write("{}\n".format(slug))
 
 def AlreadyDownloaded(slug):
-    with open('done.txt') as myfile:
+    with open('/home/reaper/scripts/archive.log') as myfile:
         if slug in myfile.read():
             return True
     return False
@@ -51,12 +51,12 @@ if args.limit != None:
 else:
     Clips_Limit = None
 try:
-    os.mkdir("./top-clips")
+    os.mkdir("/home/reaper/downloads/top-clips")
     print("[SUCCESS] Directory top-clips Created ") 
 except FileExistsError:
     print("[INFO] Directory top-clips already exists")
 try:
-    os.mkdir("./top-clips/{}".format(Twitch_Username))
+    os.mkdir("/home/reaper/downloads/top-clips/{}".format(Twitch_Username))
     print("[SUCCESS] Directory top-clips/{} Created ".format(Twitch_Username)) 
 except FileExistsError:
     print("[INFO] Directory top-clips/{} already exists".format(Twitch_Username))
@@ -80,12 +80,12 @@ for Range in Range_List:
             for clip in clips:
                 if Clips_Limit != None:
                     if i <= Clips_Limit:
-                        DownloadClip("./top-clips/{}".format(Twitch_Username), clip['node']['slug'], u"{} - {} - {}".format(str(clip['node']['viewCount']), clip['node']['createdAt'].split('T')[0], clip['node']['title']), i)
+                        DownloadClip("/home/reaper/downloads/top-clips/{}".format(Twitch_Username), clip['node']['slug'], u"{} - {} - {}".format(str(clip['node']['viewCount']), clip['node']['createdAt'].split('T')[0], clip['node']['title']), i)
                         i = i + 1
                     else:
                         doneParsing = True
                 else:
-                    DownloadClip("./top-clips/{}".format(Twitch_Username), clip['node']['slug'], u"{} - {} - {}".format(str(clip['node']['viewCount']), clip['node']['createdAt'].split('T')[0], clip['node']['title']), i)
+                    DownloadClip("/home/reaper/downloads/top-clips/{}".format(Twitch_Username), clip['node']['slug'], u"{} - {} - {}".format(str(clip['node']['viewCount']), clip['node']['createdAt'].split('T')[0], clip['node']['title']), i)
                     i = i + 1
             if not r.json()[0]['data']['user']['clips']['pageInfo']['hasNextPage']:
                 doneParsing = True
