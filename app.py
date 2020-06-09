@@ -6,11 +6,11 @@ download_path = "/home/reaper/downloads/my-clips"
 filesList = []
 
 def MarkDone(slug):
-    with open("done.txt", "a+") as myfile:
+    with open("/home/reaper/scripts/archive.log", "a+") as myfile:
         myfile.write("{}\n".format(slug))
 
 def AlreadyDownloaded(slug):
-    with open('done.txt') as myfile:
+    with open('/home/reaper/scripts/archive.log') as myfile:
         if slug in myfile.read():
             return True
     return False
