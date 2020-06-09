@@ -2,7 +2,7 @@ import requests, argparse, os, unicodedata
 from slugify import slugify
 from time import sleep
 
-download_path = "./downloads"
+download_path = "/home/reaper/downloads/my-clips"
 filesList = []
 
 def MarkDone(slug):
